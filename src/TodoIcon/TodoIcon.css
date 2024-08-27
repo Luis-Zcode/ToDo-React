@@ -1,0 +1,97 @@
+.TodoItem {
+    background-color: #fafafa;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 10px 0px rgb(11, 88, 243);
+    border-radius: 15px;
+    margin: 10px 64px 20px 20px;
+    border: solid rgb(0, 157, 255) 1px;
+}
+
+.TodoItem:hover {
+    background-color: rgba(42, 217, 233, 0.462);
+}
+
+.TodoItem-p {
+    margin: 24px 0 24px 24px;
+    width: calc(100% - 120px);
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.TodoItem-p--complete {
+    text-decoration: line-through;
+}
+
+.Icon-container {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 48px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.Icon-container-check--active{
+    color: green;
+}
+
+.Icon-container-check{
+    position: relative;
+    left: 12px;
+}
+
+.Icon-container-delete {
+    position: absolute;
+    top: -24px;
+    right: 0;
+}
+
+.Icon-container-delete:hover {
+    color: red;
+}
+
+.Icon-svg{
+    width: 24px;
+    height: 24px;
+
+}
+
+.Icon-container-check:hover .Icon-svg{
+    fill: green;
+}
+
+.Icon-container-delete:hover .Icon-svg {
+    fill: red;
+}
+
+.contenedorLike div{
+    display: flex;
+    justify-content: center;
+}
+
+.contenedorLike {
+    display: inline;
+    justify-content: center;
+    align-content: center;
+    margin-right: 80px;
+    margin-top: 10px;
+    
+}
+.contenedorLike span{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.contenedorLike button{
+    height: 40px;
+    width: 30px;
+    background: none;
+    border: none;
+}
