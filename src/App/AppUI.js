@@ -10,11 +10,10 @@ import { TodosEMpty } from '../TodosEMpty';
 import { todoContext } from '../TodoContext';
 import { Modal } from '../Modal';
 import { Form } from '../TodoForm';
-import { TodoEdit } from '../TodoEdit';
 
 function AppUI() {
     const { loading, error, completeTodo, onDesable,
-        likesM, likesN, searchedtodos, openModal, total,editTodo, openEdit } = React.useContext(todoContext)
+        likesM, likesN, searchedtodos, openModal, total,editTodo } = React.useContext(todoContext)
     
     return (
         <>
@@ -44,12 +43,11 @@ function AppUI() {
                     />
                 ))}
 
-
             </TodoList>
 
             <CreateTodoButton >+</CreateTodoButton>
 
-            {(openModal && <Modal><Form Modal={('Modal')} /></Modal>) || (openEdit && <Modal><TodoEdit Edit={'Edit'} /></Modal>)}
+            {openModal && <Modal><Form /></Modal>}
 
         </>
     )

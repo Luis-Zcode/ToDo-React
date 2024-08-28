@@ -1,14 +1,12 @@
 import React from 'react'
 import { useLocalStorage } from './useLocalStorage'
-
 const todoContext = React.createContext()
 
 function TodoProvider({ children }) {
 
     const [openModal, setOpenModal] = React.useState(false)
-    const [openEdit, setOpenEdit] = React.useState(false)
-    const [ed, setEd] = React.useState('')
-    const [anteriorNombre, setAnteriorNombre] = React.useState('')
+    const [id, setId] = React.useState()
+    const [newTodoValue, setNewTodoValue] = React.useState('')
     const [searchValue, setSeatchValue] = React.useState('')
 
     const {
@@ -75,25 +73,23 @@ function TodoProvider({ children }) {
     }
 
     const editTodo = (id) => {
-        setOpenEdit(true)
+        setOpenModal(true)
+        setId(id)
         let newTodo = [...todos]
         let todoIndex = newTodo.findIndex(
             (todo) => todo.id === id
         )
-        let anteriornombre = newTodo[todoIndex].Text
-        setAnteriorNombre(anteriornombre)
-        setEd(id)
+        setNewTodoValue(newTodo[todoIndex].Text)
     }
 
-    const edit = (text) => {
+    const edit = (id, text) => {
         if (text !== '') {
             let newTodo = [...todos]
             let todoIndex = newTodo.findIndex(
-                (todo) => todo.id === ed
+                (todo) => todo.id === id
             )
             newTodo[todoIndex].Text = text
             saveTodos(newTodo)
-            setEd('')
         }
     }
 
@@ -126,11 +122,12 @@ function TodoProvider({ children }) {
             setOpenModal,
             openModal,
             addTodo,
-            openEdit,
-            setOpenEdit,
             editTodo,
+            newTodoValue,
+            setNewTodoValue,
             edit,
-            anteriorNombre
+            id,
+            setId
         }} >
             {children}
         </todoContext.Provider>

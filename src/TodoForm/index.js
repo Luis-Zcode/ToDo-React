@@ -8,28 +8,40 @@ function Form() {
     const {
         addTodo,
         setOpenModal,
-        
+        newTodoValue,
+        setNewTodoValue,
+        id,
+        edit,
+        setId
     } = React.useContext(todoContext)
-
-    const [newTodoValue, setNewTodoValue] = React.useState('')
-
     const onSubmit = (event) => {
         event.preventDefault()
         addTodo(newTodoValue)
         setOpenModal(false)
+        setNewTodoValue('')
     }
 
     const onCancel = () => {
         setOpenModal(false)
+        setNewTodoValue('')
+        setId()
     }
 
     const onChange = (event) => {
         setNewTodoValue(event.target.value)
     }
 
+    const update = (event) => {
+        event.preventDefault()
+        edit(id, newTodoValue)
+        setOpenModal(false)
+        setNewTodoValue('')
+        setId()
+    }
+
     return (
-        <form className="form" onSubmit={onSubmit}>
-            <p id="heading">Crear Todo</p>
+        <form className="form" onSubmit={(id ? update : onSubmit)}>
+            <p id="heading">{(id ? 'Actualizar Todo' : 'Crear Todo')}</p>
             <div className="field">
                 <TODOSVG />
                 <textarea
@@ -42,7 +54,7 @@ function Form() {
             <div className="btn">
                 <button className="button2" onClick={onCancel}>Cancelar</button>
             </div>
-            <button className="button1">Crear Todo</button>
+            <button className="button1">{(id ? 'Actualizar' : 'Crear Todo')}</button>
         </form>
     )
 

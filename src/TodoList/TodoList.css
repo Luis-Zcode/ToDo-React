@@ -1,6 +1,6 @@
-.Todolist {
-    margin: 0;
-    padding: 0 0 56px 0;
+.TodoList {
+    padding: 0;
     list-style: none;
-    background-color: rgb(255, 60, 0);
+    width: 100%;
+    justify-content: center;
 }
