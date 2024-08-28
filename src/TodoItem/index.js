@@ -4,7 +4,7 @@ import { DeleteIcon } from '../TodoIcon/DeleteIcon'
 import { ReactComponent as Like } from '../TodoIcon/like.svg'
 import { ReactComponent as Dislike} from '../TodoIcon/dislike.svg'
 import '../TodoIcon'
-function TodoItem({ completado, text, onComplete, onDesable, likes, likesM, likesN}) {
+function TodoItem({ completado, text, onComplete, onDesable, likes, likesM, likesN, editTodo}) {
   
   return (
     <li className="TodoItem">
@@ -17,6 +17,10 @@ function TodoItem({ completado, text, onComplete, onDesable, likes, likesM, like
       <p className={`TodoItem-p ${completado && 'TodoItem-p--complete'}`}>
         {text}
       </p>
+
+      <div>
+        <button onClick={editTodo}>Editar</button>
+      </div>
 
       <div className='contenedorLike'>
         <span>{likes}</span>

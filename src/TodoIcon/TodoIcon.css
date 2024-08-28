@@ -15,11 +15,14 @@
 }
 
 .TodoItem-p {
-    margin: 24px 0 24px 24px;
+    margin: 20px 10px 20px 20px;
     width: calc(100% - 120px);
     font-size: 18px;
     line-height: 24px;
     font-weight: 400;
+    min-height: 40px;
+    max-height: 50px;
+    overflow:auto;
 }
 
 .TodoItem-p--complete {

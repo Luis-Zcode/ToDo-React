@@ -4,10 +4,11 @@ import { todoContext } from '../TodoContext'
 import { ReactComponent as TODOSVG } from '../TodoIcon/todo.svg'
 
 function Form() {
+
     const {
         addTodo,
         setOpenModal,
-
+        
     } = React.useContext(todoContext)
 
     const [newTodoValue, setNewTodoValue] = React.useState('')
@@ -30,7 +31,7 @@ function Form() {
         <form className="form" onSubmit={onSubmit}>
             <p id="heading">Crear Todo</p>
             <div className="field">
-                <TODOSVG/>
+                <TODOSVG />
                 <textarea
                     value={newTodoValue}
                     onChange={(event) => onChange(event)}
@@ -44,6 +45,7 @@ function Form() {
             <button className="button1">Crear Todo</button>
         </form>
     )
+
 }
 
 export { Form }

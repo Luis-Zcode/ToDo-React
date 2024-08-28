@@ -10,10 +10,12 @@ import { TodosEMpty } from '../TodosEMpty';
 import { todoContext } from '../TodoContext';
 import { Modal } from '../Modal';
 import { Form } from '../TodoForm';
+import { TodoEdit } from '../TodoEdit';
 
 function AppUI() {
     const { loading, error, completeTodo, onDesable,
-        likesM, likesN, searchedtodos, openModal } = React.useContext(todoContext)
+        likesM, likesN, searchedtodos, openModal, total,editTodo, openEdit } = React.useContext(todoContext)
+    
     return (
         <>
             <TodoCounter />
@@ -23,8 +25,11 @@ function AppUI() {
 
                 {error && <TodosError />}
 
-                {(!loading && !error) && (searchedtodos.length === 0)
+                {(!loading && !error) && (total === 0)
                     && <TodosEMpty />}
+
+                {(!loading && total > 0) && searchedtodos.length === 0 && <p>No se encontro coincidencia</p>}
+
                 {searchedtodos.map(todo => (
                     <TodoItem
                         key={todo.id}
@@ -35,13 +40,17 @@ function AppUI() {
                         likes={todo.likes}
                         likesM={() => likesM(todo.id)}
                         likesN={() => likesN(todo.id)}
+                        editTodo={() => editTodo(todo.id)}
                     />
-                )) || (searchedtodos === 0 && <p>No se encontro ninguna coincidencia</p>)}
+                ))}
+
+
             </TodoList>
 
             <CreateTodoButton >+</CreateTodoButton>
 
-            {(openModal) && <Modal><Form /></Modal>}
+            {(openModal && <Modal><Form Modal={('Modal')} /></Modal>) || (openEdit && <Modal><TodoEdit Edit={'Edit'} /></Modal>)}
+
         </>
     )
 }

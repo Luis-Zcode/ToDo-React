@@ -5,6 +5,12 @@ const todoContext = React.createContext()
 
 function TodoProvider({ children }) {
 
+    const [openModal, setOpenModal] = React.useState(false)
+    const [openEdit, setOpenEdit] = React.useState(false)
+    const [ed, setEd] = React.useState('')
+    const [anteriorNombre, setAnteriorNombre] = React.useState('')
+    const [searchValue, setSeatchValue] = React.useState('')
+
     const {
         item: todos,
         saveItem: saveTodos,
@@ -17,7 +23,6 @@ function TodoProvider({ children }) {
         saveItem: saveContador,
     } = useLocalStorage('CONTADOR_V1', 0)
 
-    const [searchValue, setSeatchValue] = React.useState('')
 
     const todosCompletados = todos.filter(todos => todos.completado).length
 
@@ -26,7 +31,6 @@ function TodoProvider({ children }) {
     let searchedtodos = todos.filter((todos) => {
         return todos.Text.toLowerCase().includes(searchValue.toLowerCase())
     })
-
 
     let completeTodo = (id) => {
         let newTodo = [...todos]
@@ -69,7 +73,29 @@ function TodoProvider({ children }) {
             alert('error')
         }
     }
-    const [openModal, setOpenModal] = React.useState(false)
+
+    const editTodo = (id) => {
+        setOpenEdit(true)
+        let newTodo = [...todos]
+        let todoIndex = newTodo.findIndex(
+            (todo) => todo.id === id
+        )
+        let anteriornombre = newTodo[todoIndex].Text
+        setAnteriorNombre(anteriornombre)
+        setEd(id)
+    }
+
+    const edit = (text) => {
+        if (text !== '') {
+            let newTodo = [...todos]
+            let todoIndex = newTodo.findIndex(
+                (todo) => todo.id === ed
+            )
+            newTodo[todoIndex].Text = text
+            saveTodos(newTodo)
+            setEd('')
+        }
+    }
 
     const addTodo = (text) => {
         let newTodo = [...todos]
@@ -99,7 +125,12 @@ function TodoProvider({ children }) {
             likesN,
             setOpenModal,
             openModal,
-            addTodo
+            addTodo,
+            openEdit,
+            setOpenEdit,
+            editTodo,
+            edit,
+            anteriorNombre
         }} >
             {children}
         </todoContext.Provider>
